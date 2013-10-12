@@ -48,12 +48,35 @@ The datetime and timedelta classes will be immensely helpful here, as will the s
 
 import sys
 import datetime
+import linecache
 
 def parse_one_record(line):
     """Take a line from reservations.csv and return a dictionary representing that record. (hint: use the datetime type when parsing the start and end date columns)"""
 
-    
-    return {}
+    reservation = open('reservations.csv').readlines()[line]
+    reservations_dict = {}
+    items = reservation.split(",")
+    print items
+    unit = items[0]
+
+    if len(items[1])<2:
+        '{:0>2d}'.format(items[1])
+    print 
+
+
+    ####NEED TO FIGURE OUT HOW TO PARSE DATES WITHOUT PADDED ZEROS#######
+    # start_date = datetime.datetime.strptime(items[1], "%m/%d/%Y")
+    # end_date = datetime.datetime.strptime(items[1], "%m/%d/%Y")
+
+    # start_date = items[1].replace("/", ",").datetime.date
+    # end_date = items[2].replace("/", ",").datetime.date
+
+    reservations_dict[unit] = start_date, end_date
+
+    print reservations_dict
+
+parse_one_record(0)
+
 
 def read_units():
     """Read in the file units.csv and returns a list of all known units."""
