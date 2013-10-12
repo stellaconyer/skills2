@@ -24,15 +24,41 @@ def common_items(list1, list2):
 
     print common_list
 
-long_list = ["a", "not", "as", "short", "list"]
-short_list = ["a", "short", "list"]
-
-
-common_items(long_list,short_list)
 
 # Given two lists, (without using the keyword 'in' or the method 'index') return a list of all common items shared between both lists. This time, use a dictionary as part of your solution.
 def common_items2(list1, list2):
-    return []
+    combined_dict = {}
+    common_items_list = []
 
+    if len(list1) < len(list2):
+        initial_list = list1
+        next_list = list2
+    else:
+        initial_list = list2
+        next_list = list1
 
+    counter = 0
+    while counter < len(initial_list):
+        combined_dict[initial_list[counter]] = combined_dict.get(initial_list[counter], 0)+1
+        counter += 1
 
+    counter2 = 0
+    while counter2 < len(next_list):
+        if combined_dict.get(next_list[counter2], 0) != 0:
+            combined_dict[next_list[counter2]] += 1 
+        counter2 += 1
+
+    counter3 = 0
+    while counter3 < len(combined_dict):
+        if combined_dict[initial_list[counter3]] >= 2:
+            new_item = [initial_list[counter3]]
+            print new_item
+            common_items_list.append(new_item)
+        counter3 += 1
+
+    print common_items_list
+
+long_list = ["a", "not", "as", "short", "list", "will", "this", "still", "work"]
+short_list = ["a", "short", "list", "mostly"]
+
+common_items2(long_list, short_list)
