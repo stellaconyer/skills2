@@ -58,7 +58,7 @@ def common_items2(list1, list2):
 
     print common_items_list
 
-long_list = ["a", "not", "as", "short", "list", "will", "this", "still", "work"]
-short_list = ["a", "short", "list", "mostly"]
+# long_list = ["a", "not", "as", "short", "list", "will", "this", "still", "work"]
+# short_list = ["a", "short", "list", "mostly"]
 
-common_items2(long_list, short_list)
+# common_items2(long_list, short_list)
