@@ -53,38 +53,46 @@ import linecache
 def parse_one_record(line):
     """Take a line from reservations.csv and return a dictionary representing that record. (hint: use the datetime type when parsing the start and end date columns)"""
 
-    reservation = open('reservations.csv').readlines()[line]
+    reservation_file = open('reservations.csv')
+    lines = reservation_file.readlines()
+    reservation_file.close()
+    reservation = lines[line]
+    
+    items = reservation.replace(" ","").replace("\n", "").split(",")
+
     reservations_dict = {}
-    items = reservation.split(",")
-    print items
-    unit = items[0]
 
-    if len(items[1])<2:
-        '{:0>2d}'.format(items[1])
-    print 
+    unit = int(items[0])
 
+    start_date = datetime.datetime.strptime(items[1], "%m/%d/%Y")
+    end_date = datetime.datetime.strptime(items[2], "%m/%d/%Y")
 
-    ####NEED TO FIGURE OUT HOW TO PARSE DATES WITHOUT PADDED ZEROS#######
-    # start_date = datetime.datetime.strptime(items[1], "%m/%d/%Y")
-    # end_date = datetime.datetime.strptime(items[1], "%m/%d/%Y")
-
-    # start_date = items[1].replace("/", ",").datetime.date
-    # end_date = items[2].replace("/", ",").datetime.date
-
-    reservations_dict[unit] = start_date, end_date
-
+    reservations_dict[unit] = (start_date, end_date)
     print reservations_dict
 
-parse_one_record(0)
-
+parse_one_record(1)
 
 def read_units():
     """Read in the file units.csv and returns a list of all known units."""
-    return []
+    units_file = open('units.csv')
+    lines = units_file.readlines()
+    units_file.close()
+    list_of_all_units = []
+
+    for line in lines:
+        a_unit = line.split(",")
+        list_of_all_units.append(a_unit[0])
+
 
 def read_existing_reservations():
     """Reads in the file reservations.csv and returns a list of reservations."""
-    return []
+    f = open('reservations.csv')
+    text = f.read()
+    f.close()
+    all_reservations = text.split("\n")
+    print all_reservations
+
+read_existing_reservations()
 
 def available(units, reservations, start_date, occupants, stay_length):
     unit_id = 0
